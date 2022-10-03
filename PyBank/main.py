@@ -12,10 +12,9 @@ import statistics
 budgetcsv = os.path.join("Resources","budget_data.csv")
 
 #Set output to text file
-text = "output.txt"
+text = os.path.join("analysis","financial.analysis.txt")
 
 #create lists to store data
-months = []
 profits = []
 changes = []
 
@@ -26,7 +25,7 @@ total_change = 0
 total_profit = 0
 greatest_increase = 0
 greatest_decrease = 0
-#Set max profit and losses as empty strings
+#Set max profit and losses as empty
 top_profit = ''
 top_loss = ''
 
@@ -46,7 +45,8 @@ with open(budgetcsv) as csvfile:
         month += 1
         
         #The net total amount of "Profit/Losses" over the entire period
-        total_profit += int(row[1])
+        
+        profit += int(row[1])
         
         #If statement to calculate top profit and loss
         #The greatest increase in profits (date and amount) over the entire period
@@ -62,28 +62,28 @@ with open(budgetcsv) as csvfile:
 
 # #calculate monthly changes
 for i in range(len(changes)-1):
-    monthly_change = (changes[i+1] - changes[i])
-    profits.append(monthly_change)
+    total_change = (changes[i+1] - changes[i])
+    profits.append(total_change)
 
-# #calculate average profits (found online)  
+# #calculate average profits    
 average_change = statistics.mean(profits)
 
 # #print data
 print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months: {month}")
-print(f"Total: ${total_profit}")
+print(f"Total: ${profit}")
 print(f"Average Change: ${average_change}")
 print(f"Greatest Increase in Profits: {top_profit} (${greatest_increase})")
 print(f"Greatest Decrease in Profits: {top_loss} (${greatest_decrease})")
 
 # #Create .txt file with same results
 f = open("financial_analysis.txt", "w")
-f.write("Financial Analysis")
-f.write("----------------------------")
-f.write(f"Total Months: {month}")
-f.write(f"Total: ${profit}")
-f.write(f"Average Change: ${average_change}")
-f.write(f"Greatest Increase in Profits: {top_profit} (${greatest_increase})")
-f.write(f"Greatest Decrease in Profits: {top_loss} (${greatest_decrease})")
+f.write("Financial Analysis\n")
+f.write("----------------------------\n")
+f.write(f"Total Months: {month}\n")
+f.write(f"Total: ${profit}\n")
+f.write(f"Average Change: ${average_change}\n")
+f.write(f"Greatest Increase in Profits: {top_profit} (${greatest_increase})\n")
+f.write(f"Greatest Decrease in Profits: {top_loss} (${greatest_decrease})\n")
 
