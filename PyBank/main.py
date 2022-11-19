@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Your task is to create a Python script that analyzes the records to calculate
 # each of the following:
 #Import .csv file
@@ -12,10 +11,8 @@ import statistics
 #Read in .csv file
 budgetcsv = os.path.join("PyBank","Resources","budget_data.csv")
 
-#Set output to text file
-text = os.path.join("analysis","financial.analysis.txt")
-
 #create lists to store data
+months = []
 profits = []
 changes = []
 
@@ -26,156 +23,73 @@ total_change = 0
 total_profit = 0
 greatest_increase = 0
 greatest_decrease = 0
-#Set max profit and losses as empty
-top_profit = ''
-top_loss = ''
-
-
 
 #Open source file and encode
 with open(budgetcsv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     
-    #skip the header line in file
+#skip the header line in file
     next(csvreader)
     
-    #Begin looping through and analyzing data
+#Begin looping through and collecting data
     for row in csvreader:
         
-        #The total number of months included in the dataset
+#The total number of months included in the dataset
         month += 1
         
-        #The net total amount of "Profit/Losses" over the entire period
+#Fill months list
+        months.append(row[0])
         
-        profit += int(row[1])
+#The net total amount of "Profit/Losses" over the entire period
+        total_profit += int(row[1])
         
-        #If statement to calculate top profit and loss
-        #The greatest increase in profits (date and amount) over the entire period
+#If statement to calculate top profit and loss
+#The greatest increase in profits over the entire period
         if int(row[1]) > greatest_increase:
-            top_profit = (row[0])
+            # top_profit = (row[0])
             greatest_increase = int(row[1])
         
-#         #The greatest decrease in profits (date and amount) over the entire period
+#The greatest decrease in profits over the entire period
         elif int(row[1]) < greatest_decrease:
-            top_loss = (row[0])
+            # top_loss = (row[0])
             greatest_decrease = int(row[1])
         changes.append(int(row[1]))
 
 # #calculate monthly changes
 for i in range(len(changes)-1):
-    total_change = (changes[i+1] - changes[i])
-    profits.append(total_change)
+    monthly_change = (changes[i+1] - changes[i])
+    profits.append(monthly_change)
+    
+#Calculate highest and lowest changes
+best_profit = max(profits)
+worst_loss = min(profits)
 
-# #calculate average profits    
-average_change = statistics.mean(profits)
+#Assign variables for output
+highest_profit = profits.index(best_profit)
+highest_loss = profits.index(worst_loss)
+
+best_day = months[highest_profit +1]
+worst_day = months[highest_loss +1]
+
+# #calculate average profits 
+average_change = round(statistics.mean(profits),2)
 
 # #print data
 print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months: {month}")
-print(f"Total: ${profit}")
+print(f"Total: ${total_profit}")
 print(f"Average Change: ${average_change}")
-print(f"Greatest Increase in Profits: {top_profit} (${greatest_increase})")
-print(f"Greatest Decrease in Profits: {top_loss} (${greatest_decrease})")
+print(f"Greatest Increase in Profits: {best_day} (${best_profit})")
+print(f"Greatest Decrease in Profits: {worst_day} (${worst_loss})")
 
 # #Create .txt file with same results
 f = open("financial_analysis.txt", "w")
 f.write("Financial Analysis\n")
 f.write("----------------------------\n")
 f.write(f"Total Months: {month}\n")
-f.write(f"Total: ${profit}\n")
+f.write(f"Total: ${total_profit}\n")
 f.write(f"Average Change: ${average_change}\n")
-f.write(f"Greatest Increase in Profits: {top_profit} (${greatest_increase})\n")
-f.write(f"Greatest Decrease in Profits: {top_loss} (${greatest_decrease})\n")
+f.write(f"Greatest Increase in Profits: {best_day} (${best_profit})\n")
+f.write(f"Greatest Decrease in Profits: {worst_day} (${worst_loss})")
 
-=======
-# Your task is to create a Python script that analyzes the records to calculate
-# each of the following:
-#Import .csv file
-import os
-
-import csv
-
-#Import statistics to calculate mean (found online)
-import statistics
-
-#Read in .csv file
-budgetcsv = os.path.join("PyBank","Resources","budget_data.csv")
-
-#Set output to text file
-text = os.path.join("analysis","financial.analysis.txt")
-
-#create lists to store data
-profits = []
-changes = []
-
-#Set counters to 0
-month = 0
-profit = 0
-total_change = 0
-total_profit = 0
-greatest_increase = 0
-greatest_decrease = 0
-#Set max profit and losses as empty
-top_profit = ''
-top_loss = ''
-
-
-
-#Open source file and encode
-with open(budgetcsv) as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
-    
-    #skip the header line in file
-    next(csvreader)
-    
-    #Begin looping through and analyzing data
-    for row in csvreader:
-        
-        #The total number of months included in the dataset
-        month += 1
-        
-        #The net total amount of "Profit/Losses" over the entire period
-        
-        profit += int(row[1])
-        
-        #If statement to calculate top profit and loss
-        #The greatest increase in profits (date and amount) over the entire period
-        if int(row[1]) > greatest_increase:
-            top_profit = (row[0])
-            greatest_increase = int(row[1])
-        
-#         #The greatest decrease in profits (date and amount) over the entire period
-        elif int(row[1]) < greatest_decrease:
-            top_loss = (row[0])
-            greatest_decrease = int(row[1])
-        changes.append(int(row[1]))
-
-# #calculate monthly changes
-for i in range(len(changes)-1):
-    total_change = (changes[i+1] - changes[i])
-    profits.append(total_change)
-
-# #calculate average profits    
-average_change = statistics.mean(profits)
-
-# #print data
-print("Financial Analysis")
-print("----------------------------")
-print(f"Total Months: {month}")
-print(f"Total: ${profit}")
-print(f"Average Change: ${average_change}")
-print(f"Greatest Increase in Profits: {top_profit} (${greatest_increase})")
-print(f"Greatest Decrease in Profits: {top_loss} (${greatest_decrease})")
-
-# #Create .txt file with same results
-f = open("financial_analysis.txt", "w")
-f.write("Financial Analysis\n")
-f.write("----------------------------\n")
-f.write(f"Total Months: {month}\n")
-f.write(f"Total: ${profit}\n")
-f.write(f"Average Change: ${average_change}\n")
-f.write(f"Greatest Increase in Profits: {top_profit} (${greatest_increase})\n")
-f.write(f"Greatest Decrease in Profits: {top_loss} (${greatest_decrease})\n")
-
->>>>>>> b2d0d4dafff96b359505b3e084f83bbbe5ab60c8
