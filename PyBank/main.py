@@ -46,12 +46,10 @@ with open(budgetcsv) as csvfile:
 #If statement to calculate top profit and loss
 #The greatest increase in profits over the entire period
         if int(row[1]) > greatest_increase:
-            # top_profit = (row[0])
             greatest_increase = int(row[1])
         
 #The greatest decrease in profits over the entire period
         elif int(row[1]) < greatest_decrease:
-            # top_loss = (row[0])
             greatest_decrease = int(row[1])
         changes.append(int(row[1]))
 
@@ -60,7 +58,7 @@ for i in range(len(changes)-1):
     monthly_change = (changes[i+1] - changes[i])
     profits.append(monthly_change)
     
-#Calculate highest and lowest changes
+#Identify highest and lowest changes
 best_profit = max(profits)
 worst_loss = min(profits)
 

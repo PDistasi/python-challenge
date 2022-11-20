@@ -54,7 +54,7 @@ with open(pollcsv) as csvfile:
 #       #Perform calculation of unique to total votes
         percentage = (votes) / (vote) * 100
         #Set variable to capture results for printing
-        results = (f"{candidate}: {percentage:.3f}% ({votes})\n")git ad
+        results = (f"{candidate}: {percentage:.3f}% ({votes})\n")
         
 # # # * The winner of the election based on popular vote.
         if (votes > winning_vote):
@@ -62,7 +62,7 @@ with open(pollcsv) as csvfile:
             winner = candidate
     
 # #Print results
-
+#I cannot figure out why line 70 is only printing the last line of the results data, I am stumped and would appreciate feedback
 print("Election Results")
 print("-------------------------")
 print("Total Votes: " + str(vote))
@@ -72,8 +72,15 @@ print("-------------------------")
 print(f"Winner: " + winner)
 print("-------------------------")
 
-
-
+#Create .txt file with same results
+f = open("election_results.txt", "w")
+f.write("Election Results\n")
+f.write("-------------------------\n")
+f.write(f"Total Votes:  + str{vote}\n")
+f.write("-------------------------\n")
+f.write("{results}\n")
+f.write("-------------------------\n")
+f.write(f"Winner:  + {winner}\n")
 
 
 
