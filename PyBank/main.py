@@ -9,7 +9,7 @@ import csv
 import statistics
 
 #Read in .csv file
-budgetcsv = os.path.join("PyBank","Resources","budget_data.csv")
+budgetcsv = os.path.join("Resources","budget_data.csv")
 
 #create lists to store data
 months = []

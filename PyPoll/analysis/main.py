@@ -6,7 +6,7 @@ import os
 import csv
 
 #Set variable and path for csv file
-pollcsv = os.path.join("PyPoll\Resources","election_data.csv")
+pollcsv = os.path.join("..","Resources","election_data.csv")
 
 #Create empty lists to store the data from each column
 unique_candidates = []
@@ -44,22 +44,11 @@ with open(pollcsv) as csvfile:
         #Add vote to the unique candidates
         unique_votes[candidate] +=1
         
-# print(unique_votes) SUCCESS!
+# print(unique_votes)
         
 #* The percentage of votes each candidate won
-    #Loop through vote data per candidate
-    for candidate in unique_votes:
-        votes = unique_votes[candidate]
-        
-#       #Perform calculation of unique to total votes
-        percentage = (votes) / (vote) * 100
-        #Set variable to capture results for printing
-        results = (f"{candidate}: {percentage:.3f}% ({votes})\n")
-        
-# # # * The winner of the election based on popular vote.
-        if (votes > winning_vote):
-            winning_vote = votes
-            winner = candidate
+#     #Loop through vote data per candidate
+    
     
 # #Print results
 #I cannot figure out why line 70 is only printing the last line of the results data, I am stumped and would appreciate feedback
@@ -67,8 +56,20 @@ print("Election Results")
 print("-------------------------")
 print("Total Votes: " + str(vote))
 print("-------------------------")
-print(results)
-print("-------------------------")
+for candidate in unique_votes:
+    votes = unique_votes[candidate]
+        
+# #       #Perform calculation of unique to total votes
+    percentage = (votes) / (vote) * 100
+        #Set variable to capture results for printing
+    results = (f"{candidate}: {percentage:.3f}% ({votes})")
+        
+# # # * The winner of the election based on popular vote.
+    if (votes > winning_vote):
+        winning_vote = votes
+        winner = candidate
+    print(results)
+print("\n-------------------------")
 print(f"Winner: " + winner)
 print("-------------------------")
 
@@ -76,11 +77,23 @@ print("-------------------------")
 f = open("election_results.txt", "w")
 f.write("Election Results\n")
 f.write("-------------------------\n")
-f.write(f"Total Votes:  + str{vote}\n")
+f.write(f"Total Votes:  {vote}\n")
 f.write("-------------------------\n")
-f.write("{results}\n")
+for candidate in unique_votes:
+    votes = unique_votes[candidate]
+        
+# #       #Perform calculation of unique to total votes
+    percentage = (votes) / (vote) * 100
+        #Set variable to capture results for printing
+    results = (f"{candidate}: {percentage:.3f}% ({votes})")
+        
+# # # * The winner of the election based on popular vote.
+    if (votes > winning_vote):
+        winning_vote = votes
+        winner = candidate
+    f.write(f"{results}\n")
 f.write("-------------------------\n")
-f.write(f"Winner:  + {winner}\n")
+f.write(f"Winner: {winner}\n")
 
 
 
